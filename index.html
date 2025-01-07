@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pomodoro Timer</h1>
+            <button id="modeToggle" onclick="toggleMode()" class="work-mode">Break</button>
+        </div>
+        <div id="focusMessage" class="focus-message"></div>
+        <div class="timer">
+            <span id="minutes">25</span>:<span id="seconds">00</span>
+        </div>
+        <div class="controls">
+            <button onclick="startTimer()">Start</button>
+            <button onclick="pauseTimer()">Pause</button>
+            <button onclick="resetTimer()">Reset</button>
+            <button onclick="addFiveMinutes()" class="add-time">+5 Min</button>
+        </div>
+        <div id="modeMessage" class="mode-message">
+            Time to focus!
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
