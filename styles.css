@@ -9,29 +9,57 @@ body {
 }
 
 .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
     text-align: center;
-    background-color: white;
-    padding: 3rem;
-    border-radius: 40px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
-    max-width: 500px;
-    width: 90%;
+}
+
+.header {
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-right: 3.5rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #1A202C;
+    font-weight: 600;
+    margin: 0;
+}
+
+.focus-message {
+    font-size: 1.1rem;
+    color: #64748B;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.focus-message:empty {
+    display: none;
+    margin: 0;
+}
+
+.focus-message:not(:empty) {
+    background-color: #F8F9FA;
 }
 
 .timer {
     font-size: 8rem;
     font-weight: 600;
-    margin: 1rem 0 3rem 0;
-    color: purple;
-    font-family: 'Inter', sans-serif;
+    margin: 0 0 3rem 0;
 }
 
 .controls {
     display: flex;
-    justify-content: center;
     gap: 1rem;
-    margin: 2rem 0;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 button {
@@ -43,46 +71,77 @@ button {
     font-weight: 500;
     transition: all 0.2s ease;
     background-color: #F1F3F5;
-    color: #4A5568;
+    color: #475569;
+    min-width: 120px;
 }
 
 .controls button:first-child {
-    background-color: #4785FF;
+    background-color: #475569;
     color: white;
-    padding: 1rem 2.5rem;
+}
+
+@media (max-width: 600px) {
+    .controls {
+        gap: 0.75rem;
+    }
+    
+    button {
+        font-size: 1rem;
+        padding: 0.875rem 1.5rem;
+        min-width: calc(50% - 0.75rem);
+    }
 }
 
 #modeToggle {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
-    padding: 0.8rem;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 1rem;
     font-size: 1rem;
-    border-radius: 12px;
+    border-radius: 50%;
     background-color: #F1F3F5;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: auto;
+}
+
+#modeToggle .material-icons {
+    font-size: 24px;
+}
+
+#modeToggle.work-mode .material-icons {
+    content: "coffee";  /* Break icon */
+}
+
+#modeToggle.break-mode .material-icons {
+    content: "work";    /* Work icon */
+}
+
+.focus-message:not(:empty) {
+    margin: 1rem 0 2rem 0;
 }
 
 .focus-message {
     font-size: 1.1rem;
     color: #64748B;
-    background-color: #F8F9FA;
     padding: 0.8rem 1.5rem;
     border-radius: 12px;
     display: inline-block;
-    margin: 0.5rem 0 1rem 0;
+}
+
+.focus-message:not(:empty) {
+    background-color: #F8F9FA;
+    margin-bottom: 2rem;
 }
 
 .mode-message {
     margin-top: 3rem;
     font-size: 1.2rem;
     color: #64748B;
-}
-
-.header h1 {
-    font-size: 2.5rem;
-    color: #1A202C;
-    font-weight: 600;
-    margin-bottom: 2rem;
 }
 
 .focus-input-container {
@@ -108,34 +167,111 @@ button {
 }
 
 #focusTaskInput:focus {
-    outline: 2px solid #4785FF;
+    outline: 2px solid #475569;
     background-color: white;
 }
 
 .submit-focus {
-    background-color: #4785FF;
+    background-color: #475569;
     color: white;
     padding: 0.8rem 1.5rem;
 }
 
 .submit-focus:hover {
-    background-color: #3B76E3;
+    background-color: #334155;
 }
 
 #modeToggle.work-mode {
+    background-color: #F1F3F5;
+    color: #4785FF;
+}
+
+#modeToggle.break-mode {
+    background-color: #F1F3F5;
+    color: #059669;
+}
+
+#modeToggle.work-mode:hover {
     background-color: #4785FF;
     color: white;
 }
 
-#modeToggle.break-mode {
-    background-color: #10B981;
+#modeToggle.break-mode:hover {
+    background-color: #059669;
     color: white;
 }
 
-#modeToggle.work-mode:hover {
-    background-color: #3B76E3;
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
-#modeToggle.break-mode:hover {
-    background-color: #059669;
-} 
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    color: #1A202C;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+#modalFocusInput {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #F8F9FA;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+#modalFocusInput:focus {
+    outline: 2px solid #475569;
+    background-color: white;
+}
+
+.modal-submit {
+    background-color: #475569;
+    color: white;
+    padding: 1rem 2rem;
+    width: 100%;
+}
+
+.modal-submit:hover {
+    background-color: #334155;
+}
+
+.timer.work-mode {
+    color: #059669;
+}
+
+.timer.break-mode {
+    color: #4785FF;
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding-right: 4rem;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+}

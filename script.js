@@ -8,10 +8,8 @@ let isWorkMode = true;
 function startTimer() {
     if (!isRunning) {
         if (isWorkMode && !document.getElementById('focusMessage').textContent) {
-            const focusTask = prompt('What are you focusing on?');
-            if (focusTask) {
-                document.getElementById('focusMessage').textContent = `Focusing on: ${focusTask}`;
-            }
+            document.getElementById('focusModal').style.display = 'flex';
+            return;
         }
         isRunning = true;
         timer = setInterval(updateTimer, 1000);
@@ -61,16 +59,21 @@ function toggleMode() {
     const modeButton = document.getElementById('modeToggle');
     const modeMessage = document.getElementById('modeMessage');
     const focusMessage = document.getElementById('focusMessage');
+    const timer = document.querySelector('.timer');
     
     if (isWorkMode) {
-        modeButton.textContent = 'Break';
+        modeButton.querySelector('.material-icons').textContent = 'coffee';
         modeButton.classList.remove('break-mode');
         modeButton.classList.add('work-mode');
+        timer.classList.remove('break-mode');
+        timer.classList.add('work-mode');
         modeMessage.textContent = 'Time to focus!';
     } else {
-        modeButton.textContent = 'Work';
+        modeButton.querySelector('.material-icons').textContent = 'work';
         modeButton.classList.remove('work-mode');
         modeButton.classList.add('break-mode');
+        timer.classList.remove('work-mode');
+        timer.classList.add('break-mode');
         modeMessage.textContent = 'Take a break!';
     }
     
@@ -94,6 +97,17 @@ function submitFocusTask() {
         document.getElementById('focusMessage').textContent = `Focusing on: ${focusTask}`;
         document.getElementById('focusInput').style.display = 'none';
         document.getElementById('focusTaskInput').value = '';
+        isRunning = true;
+        timer = setInterval(updateTimer, 1000);
+    }
+}
+
+function submitModalFocus() {
+    const focusTask = document.getElementById('modalFocusInput').value.trim();
+    if (focusTask) {
+        document.getElementById('focusMessage').textContent = `Focusing on: ${focusTask}`;
+        document.getElementById('focusModal').style.display = 'none';
+        document.getElementById('modalFocusInput').value = '';
         isRunning = true;
         timer = setInterval(updateTimer, 1000);
     }

@@ -6,15 +6,18 @@
     <title>Pomodoro Timer</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Pomodoro Timer</h1>
-            <button id="modeToggle" onclick="toggleMode()" class="work-mode">Break</button>
+            <button id="modeToggle" onclick="toggleMode()" class="work-mode">
+                <span class="material-icons">coffee</span>
+            </button>
         </div>
         <div id="focusMessage" class="focus-message"></div>
-        <div class="timer">
+        <div class="timer work-mode">
             <span id="minutes">25</span>:<span id="seconds">00</span>
         </div>
         <div class="controls">
@@ -25,6 +28,13 @@
         </div>
         <div id="modeMessage" class="mode-message">
             Time to focus!
+        </div>
+        <div id="focusModal" class="modal">
+            <div class="modal-content">
+                <h2>What are you focusing on?</h2>
+                <input type="text" id="modalFocusInput" placeholder="Enter your focus...">
+                <button onclick="submitModalFocus()" class="modal-submit">Start Focusing</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
